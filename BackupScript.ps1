@@ -15,6 +15,10 @@ $BackupFolderPath = "F:\Share\ValheimBackups"
 
 # Name of each unique backup file
 $BackupName = Get-Date -Format "yyyyMMdd-HHmm"
+
+# Server world file location
+$Worldsavelocation = "C:\Users\cbarrett\AppData\LocalLow\IronGate\Valheim"
+
 #**************************************************************************
 ## ***********************END OF CONFIGURATION ITEMS***********************
 #**************************************************************************
@@ -34,22 +38,34 @@ If(!(test-path $BackupFolderPath))
 }
 
 # Copy/Compress Valheim folder
-foreach ($file in Get-ChildItem "$BackupFolderPath")
+foreach ($file in Get-ChildItem -Recurse "$Worldsavelocation")
 {
   if ((get-date).AddMinutes(-5) -gt $file.CreationTime)
   {
-Compress-Archive -path "$BackupFolderPath" -destinationpath "$BackupFolderPath\$BackupName".zip
+  write-host Creating Archive at "$BackupFolderPath"
+Compress-Archive -path "$Worldsavelocation" -destinationpath $BackupFolderPath\$BackupName.zip -Update 
+break
   }
   else
   {
+  write-host Server recently saved, waiting 5 minutes and taking backup.
   start-sleep -Seconds 300
-Compress-Archive -path "$BackupFolderPath" -destinationpath "$BackupFolderPath\$BackupName".zip
+  write-host Creating Archive at "$BackupFolderPath"
+Compress-Archive -path "$Worldsavelocation" -destinationpath $BackupFolderPath\$BackupName.zip -Update
+break
+}
 
 }
-}
+
+Write-host Backup complete you will find your backup compressed at "$BackupFolderPath" named $BackupName.zip
 
 #Prune Backups
+write-host pruning backups. You are keeping $NumToKeep  backups
+
 Get-ChildItem "$BackupFolderPath" -Recurse| where{-not $_.PsIsContainer}| sort CreationTime -desc| select -Skip "$NumToKeep"| Remove-Item -Force
+
+write-host pruning complete
+
 
 
 
