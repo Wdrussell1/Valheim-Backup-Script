@@ -1,4 +1,5 @@
 ### Valheim data backup script
+#Created by Wdrussell1/Demon1337/Casey Barrett
 ### Backs up the entire appdata folder including characters/world data
 
 ## Note: If you get errors running the script, run the following:
@@ -10,13 +11,13 @@
 # How many backups to keep before pruning older copies
 $NumToKeep = 10
 
-# Where to save backups
-$BackupFolderPath = "F:\Share\ValheimBackups"
+# Where to save backups (Default is C:\Users\(USERNAME)\Appdata\LocalLow\IronGate\ValheimBackups)
+$BackupFolderPath = "$env:USERPROFILE\AppData\LocalLow\IronGate\ValheimBackups"
 
-# Name of each unique backup file
+# Name of each unique backup file (This gets today's date and appends the file)
 $BackupName = Get-Date -Format "yyyyMMdd-HHmm"
 
-# Server world file location
+# Server world file location (Default is C:\Users\(USERNAME)\Appdata\LocalLow\IronGate\Valheim)
 $Worldsavelocation = "$env:USERPROFILE\AppData\LocalLow\IronGate\Valheim"
 
 #**************************************************************************
