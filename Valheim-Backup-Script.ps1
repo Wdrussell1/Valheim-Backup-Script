@@ -38,13 +38,14 @@ If(!(test-path $BackupFolderPath))
       New-Item -ItemType Directory -Force -Path $BackupFolderPath
 }
 
-# Copy/Compress Valheim folder
-foreach ($file in Get-ChildItem -Recurse "$Worldsavelocation")
+## Copy/Compress Valheim folder
+# Copy/Compress Worlds
+foreach ($file in Get-ChildItem -Recurse "$Worldsavelocation/worlds")
 {
   if ((get-date).AddMinutes(-5) -gt $file.CreationTime)
   {
   write-host Creating Archive at "$BackupFolderPath"
-Compress-Archive -path "$Worldsavelocation" -destinationpath $BackupFolderPath\$BackupName.zip -Update 
+Compress-Archive -path "$Worldsavelocation/worlds" -destinationpath $BackupFolderPath\$BackupName.zip -Update 
 break
   }
   else
@@ -52,7 +53,26 @@ break
   write-host Server recently saved, waiting 5 minutes and taking backup.
   start-sleep -Seconds 300
   write-host Creating Archive at "$BackupFolderPath"
-Compress-Archive -path "$Worldsavelocation" -destinationpath $BackupFolderPath\$BackupName.zip -Update
+Compress-Archive -path "$Worldsavelocation/worlds" -destinationpath $BackupFolderPath\$BackupName.zip -Update
+break
+}
+
+}
+# Copy/Compress Characters adding them to the archive
+foreach ($file in Get-ChildItem -Recurse "$Worldsavelocation/characters")
+{
+  if ((get-date).AddMinutes(-5) -gt $file.CreationTime)
+  {
+  write-host Creating Archive at "$BackupFolderPath"
+Compress-Archive -path "$Worldsavelocation/characters" -destinationpath $BackupFolderPath\$BackupName.zip -Update 
+break
+  }
+  else
+  {
+  write-host Server recently saved, waiting 5 minutes and taking backup.
+  start-sleep -Seconds 300
+  write-host Creating Archive at "$BackupFolderPath"
+Compress-Archive -path "$Worldsavelocation/characters" -destinationpath $BackupFolderPath\$BackupName.zip -Update
 break
 }
 
@@ -66,8 +86,3 @@ write-host pruning backups. You are keeping $NumToKeep  backups
 Get-ChildItem "$BackupFolderPath" -Recurse| where{-not $_.PsIsContainer}| sort CreationTime -desc| select -Skip "$NumToKeep"| Remove-Item -Force
 
 write-host pruning complete
-
-
-
-
-
