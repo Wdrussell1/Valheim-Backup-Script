@@ -15,7 +15,8 @@ Sample crontab:
 
 ### Windows
 
-# Number of backups to keep before pruning (default: 10)
+```
+## Number of backups to keep before pruning (default: 10)
 NumToKeep = 10
 
 # Backup save location (default: C:\Users\(USERNAME)\Appdata\LocalLow\IronGate\ValheimBackups)
@@ -26,9 +27,11 @@ BackupName = Get-Date -Format "yyyyMMdd-HHmm"
 
 # Server world data location (default: C:\Users\(USERNAME)\Appdata\LocalLow\IronGate\Valheim)
 $Worldsavelocation = "$env:USERPROFILE\AppData\LocalLow\IronGate\Valheim"
+```
 
 ### Linux
 
+```
 Linux default settings have been pre-customized to suggested LinuxGSM dedicated server locations.
 
 # Current user location (force set for crontab)
@@ -42,3 +45,4 @@ backupLocation=$HOME/ValheimBackups/
 
 # Server world data location (default: $HOME/.config/unity3d/IronGate/Valheim)
 worldDir=$HOME/.config/unity3d/IronGate/Valheim
+```
