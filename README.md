@@ -31,9 +31,9 @@ $Worldsavelocation = "$env:USERPROFILE\AppData\LocalLow\IronGate\Valheim"
 
 ### Linux
 
-```
 Linux default settings have been pre-customized to suggested LinuxGSM dedicated server locations.
 
+```
 # Current user location (force set for crontab)
 HOME=/home/vhserver
 
