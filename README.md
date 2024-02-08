@@ -8,22 +8,36 @@ HOW TO USE THIS SCRIPT: You can run it each day at any point, or you can setup a
 
 
 
-Modifiable variables in the script:
+# **Windows** variables in the script:
 
 
-# How many backups to keep before pruning older copies (Default is 10)
-$NumToKeep = 10
-
-# Where to save backups (Default is C:\Users\(USERNAME)\Appdata\LocalLow\IronGate\ValheimBackups)
-$BackupFolderPath = "$env:USERPROFILE\AppData\LocalLow\IronGate\ValheimBackups"
-
-# Name of each unique backup file (This gets today's date and appends the file)
-$BackupName = Get-Date -Format "yyyyMMdd-HHmm"
-
-# Server world file location (Default is C:\Users\(USERNAME)\Appdata\LocalLow\IronGate\Valheim)
-$Worldsavelocation = "$env:USERPROFILE\AppData\LocalLow\IronGate\Valheim"
-
-
+How many backups to keep before pruning older copies (Default is 10)
+>$NumToKeep = 10
+___________
+Where to save backups (Default is C:\Users\(USERNAME)\Appdata\LocalLow\IronGate\ValheimBackups)
+>$BackupFolderPath = "$env:USERPROFILE\AppData\LocalLow\IronGate\ValheimBackups"
+___________
+Name of each unique backup file (This gets today's date and appends the file)
+>$BackupName = Get-Date -Format "yyyyMMdd-HHmm"
+___________
+Server world file location (Default is C:\Users\(USERNAME)\Appdata\LocalLow\IronGate\Valheim)
+>$Worldsavelocation = "$env:USERPROFILE\AppData\LocalLow\IronGate\Valheim"
 
 
-NOTES: LINUX VERSION MAY COME AS WELL
+# **Linux** variables in the script:
+NOTE: Linux version saves backups in the YEAR-MONTH-DAY-HOUR-MINUTE-SECOND format. 
+___________
+How many backups to keep before pruning older copies (Default is 10)
+>NumToKeep = 10
+___________
+Where to save backups (Default is $HOME/ValheimBackups/)
+>BackupFolderPath=$HOME/ValheimBackups/
+___________
+Server world file location (Default is $HOME/Valheim)
+>Worldsavelocation=$HOME/Valheim
+
+
+
+
+
+
