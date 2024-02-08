@@ -15,7 +15,7 @@ $NumToKeep = 10
 $BackupFolderPath = "$env:USERPROFILE\AppData\LocalLow\IronGate\ValheimBackups"
 
 # Name of each unique backup file (This gets today's date and appends the file)
-$BackupName = Get-Date -Format "yyyyMMdd-HHmm"
+$BackupName = Get-Date -Format "yyyyMMdd-HHmmss"
 
 # Server world file location (Default is C:\Users\(USERNAME)\Appdata\LocalLow\IronGate\Valheim)
 $Worldsavelocation = "$env:USERPROFILE\AppData\LocalLow\IronGate\Valheim"
@@ -83,6 +83,6 @@ Write-host Backup complete you will find your backup compressed at "$BackupFolde
 #Prune Backups
 write-host pruning backups. You are keeping $NumToKeep  backups
 
-Get-ChildItem "$BackupFolderPath" -Recurse| where{-not $_.PsIsContainer}| sort CreationTime -desc| select -Skip "$NumToKeep"| Remove-Item -Force
+Get-ChildItem "$BackupFolderPath" -Recurse -Include *.zip| where{-not $_.PsIsContainer}| sort CreationTime -desc| select -Skip "$NumToKeep"| Remove-Item -Force
 
 write-host pruning complete
